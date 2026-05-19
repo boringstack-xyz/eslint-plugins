@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-elysia",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint plugin enforcing architectural, type-safety, lifecycle, and performance patterns for Elysia.js applications.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

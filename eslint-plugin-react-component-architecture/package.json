@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-react-component-architecture",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "ESLint plugin enforcing React component architecture conventions.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

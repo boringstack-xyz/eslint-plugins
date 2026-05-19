@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-module-boundaries",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint plugin that enforces one semantic top-level concern per TypeScript module.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

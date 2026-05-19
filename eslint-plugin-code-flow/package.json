@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-code-flow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint plugin for control-flow style rules: guard clauses over wrapped happy paths, etc.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
