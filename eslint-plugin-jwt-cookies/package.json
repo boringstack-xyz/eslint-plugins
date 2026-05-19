@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-jwt-cookies",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint rules that harden auth-cookie defaults (httpOnly, secure) and bcrypt rounds. Defense-in-depth for the cookie-config helper pattern.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

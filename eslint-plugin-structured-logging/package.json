@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-structured-logging",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint rules that enforce structured logging conventions: required event fields, masked PII in log payloads, and no stringified errors.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

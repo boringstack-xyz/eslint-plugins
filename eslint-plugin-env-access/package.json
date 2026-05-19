@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-env-access",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint rules that force all env-var reads through a single validated singleton — no raw process.env, every key must exist in the schema.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
