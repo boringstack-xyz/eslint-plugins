@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "eslint-plugin-resource-architecture": ["../src/index.ts"]
+    }
+  }
+}
+

@@ -1,0 +1,73 @@
+{
+  "name": "@boring-stack-pkg/eslint-plugin-react-component-architecture",
+  "version": "0.2.0",
+  "description": "ESLint plugin enforcing React component architecture conventions.",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AI-Starter-Templates/eslint-plugins.git",
+    "directory": "eslint-plugin-react-component-architecture"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "examples"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "typescript",
+    "react",
+    "component",
+    "architecture"
+  ],
+  "peerDependencies": {
+    "@typescript-eslint/parser": ">=8.0.0",
+    "eslint": "8.57.0 || ^9.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "8.0.0",
+    "yaml": "2.4.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.0.0",
+    "@types/node": "22.0.0",
+    "@typescript-eslint/parser": "8.0.0",
+    "@typescript-eslint/rule-tester": "8.0.0",
+    "eslint": "9.0.0",
+    "tsup": "8.0.0",
+    "typescript": "6.0.3",
+    "vitest": "2.0.0"
+  },
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  }
+}
