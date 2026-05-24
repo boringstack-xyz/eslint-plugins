@@ -4,11 +4,26 @@
   </a>
 </p>
 
-# @boring-stack-pkg/eslint-plugins
+<p align="center">
+  <a href="https://boringstack.xyz"><img src="https://img.shields.io/badge/boringstack.xyz-4ade80?style=for-the-badge&logo=safari&logoColor=4ade80&labelColor=090909" alt="boringstack.xyz"></a>
+  <a href="https://boringstack.xyz/architecture/lint-as-contract/"><img src="https://img.shields.io/badge/Docs-4ade80?style=for-the-badge&logo=readthedocs&logoColor=4ade80&labelColor=090909" alt="Docs"></a>
+  <a href="https://github.com/boringstack-xyz/eslint-plugins"><img src="https://img.shields.io/badge/GitHub-4ade80?style=for-the-badge&logo=github&logoColor=4ade80&labelColor=090909" alt="GitHub"></a>
+</p>
 
-Monorepo of custom ESLint plugins used across the Boring Stack templates.
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-e8e8ed?style=for-the-badge&labelColor=090909" alt="MIT">
+  <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=4B32C3&labelColor=090909" alt="ESLint">
+  <img src="https://img.shields.io/badge/TypeScript-3178c6?style=for-the-badge&logo=typescript&logoColor=3178c6&labelColor=090909" alt="TypeScript">
+  <img src="https://img.shields.io/badge/pnpm-f69220?style=for-the-badge&logo=pnpm&logoColor=f69220&labelColor=090909" alt="pnpm">
+</p>
 
-All packages are published to npm under the `@boring-stack-pkg` scope.
+# eslint-plugins
+
+Part of [BoringStack](https://boringstack.xyz).
+
+Monorepo of custom ESLint plugins used across the Boring Stack templates. All packages are published to npm under the `@boring-stack-pkg` scope.
+
+For documentation on how architecture rules are enforced in CI and review, see [Lint as a contract](https://boringstack.xyz/architecture/lint-as-contract/).
 
 ## Packages
 
@@ -52,3 +67,7 @@ Releases are driven by [Changesets](https://github.com/changesets/changesets):
 4. Merging that PR publishes the affected packages to npm with provenance.
 
 Publishing authenticates with an `NPM_TOKEN` automation token (stored as a GitHub Actions secret) and signs each release with [npm provenance](https://docs.npmjs.com/generating-provenance-statements) via GitHub OIDC — every published version carries a "Built and signed on GitHub Actions" badge linking back to the workflow run.
+
+## License
+
+MIT
