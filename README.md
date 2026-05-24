@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://boringstack.xyz/architecture/lint-as-contract/">
+    <img src="./assets/banner.png" alt="ESLint Plugins" />
+  </a>
+</p>
+
 # @boring-stack-pkg/eslint-plugins
 
 Monorepo of custom ESLint plugins used across the Boring Stack templates.
