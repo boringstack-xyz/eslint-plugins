@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -41,14 +42,37 @@ jobs:
       - name: Upgrade npm
         run: npm install -g npm@latest
 
-      - name: Create release PR or publish
+      - name: Verify npm auth
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Detect pending changesets
+        id: pending
+        run: |
+          shopt -s nullglob
+          for f in .changeset/*.md; do
+            if [[ "$(basename "$f")" != "README.md" ]]; then
+              echo "has=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          echo "has=false" >> "$GITHUB_OUTPUT"
+
+      - name: Create release PR
+        if: steps.pending.outputs.has == 'true'
         uses: changesets/action@v1
         with:
-          publish: pnpm release
           version: pnpm version-packages
+          publish: echo "Version PR only"
           commit: "chore: version packages"
           title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to npm
+        if: steps.pending.outputs.has == 'false'
+        run: pnpm exec changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
