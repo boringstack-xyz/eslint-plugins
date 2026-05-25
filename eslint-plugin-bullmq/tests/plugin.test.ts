@@ -16,6 +16,7 @@ describe("plugin shape", () => {
       "no-blocking-concurrency-zero",
       "queue-options-must-set-removeoncomplete",
       "queue-options-must-set-removeonfail",
+      "valkey-client-from-factory",
       "worker-must-implement-close",
       "worker-must-listen-failed"
     ]);

@@ -5,5 +5,6 @@ export const recommendedRules = {
   "bullmq/queue-options-must-set-removeoncomplete": "error",
   "bullmq/queue-options-must-set-removeonfail": "error",
   "bullmq/job-options-must-set-attempts": "error",
-  "bullmq/no-blocking-concurrency-zero": "error"
+  "bullmq/no-blocking-concurrency-zero": "error",
+  "bullmq/valkey-client-from-factory": "error",
 } as const;

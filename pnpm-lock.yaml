@@ -60,10 +60,16 @@ importers:
       '@typescript-eslint/utils':
         specifier: 8.0.0
         version: 8.0.0(eslint@9.0.0)(typescript@6.0.3)
+      micromatch:
+        specifier: 4.0.5
+        version: 4.0.5
     devDependencies:
       '@eslint/js':
         specifier: 9.0.0
         version: 9.0.0
+      '@types/micromatch':
+        specifier: 4.0.9
+        version: 4.0.9
       '@types/node':
         specifier: 22.0.0
         version: 22.0.0

@@ -3,6 +3,7 @@ import { jobOptionsMustSetAttemptsRule } from "./jobOptionsMustSetAttempts";
 import { noBlockingConcurrencyZeroRule } from "./noBlockingConcurrencyZero";
 import { queueOptionsMustSetRemoveOnCompleteRule } from "./queueOptionsMustSetRemoveOnComplete";
 import { queueOptionsMustSetRemoveOnFailRule } from "./queueOptionsMustSetRemoveOnFail";
+import { valkeyClientFromFactoryRule } from "./valkeyClientFromFactory";
 import { workerMustImplementCloseRule } from "./workerMustImplementClose";
 import { workerMustListenFailedRule } from "./workerMustListenFailed";
 
@@ -13,5 +14,6 @@ export const rules = {
   "queue-options-must-set-removeoncomplete": queueOptionsMustSetRemoveOnCompleteRule,
   "queue-options-must-set-removeonfail": queueOptionsMustSetRemoveOnFailRule,
   "job-options-must-set-attempts": jobOptionsMustSetAttemptsRule,
-  "no-blocking-concurrency-zero": noBlockingConcurrencyZeroRule
+  "no-blocking-concurrency-zero": noBlockingConcurrencyZeroRule,
+  "valkey-client-from-factory": valkeyClientFromFactoryRule,
 };
