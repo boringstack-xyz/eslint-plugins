@@ -12,8 +12,7 @@
     "directory": "eslint-plugin-comment-hygiene"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "sideEffects": false,
   "files": [

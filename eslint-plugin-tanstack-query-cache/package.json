@@ -11,8 +11,7 @@
     "directory": "eslint-plugin-tanstack-query-cache"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "sideEffects": false,
   "files": [

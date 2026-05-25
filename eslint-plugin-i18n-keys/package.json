@@ -11,8 +11,7 @@
     "directory": "eslint-plugin-i18n-keys"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "sideEffects": false,
   "files": [

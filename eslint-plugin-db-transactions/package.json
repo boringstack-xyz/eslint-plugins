@@ -12,8 +12,7 @@
     "directory": "eslint-plugin-db-transactions"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "sideEffects": false,
   "files": [
