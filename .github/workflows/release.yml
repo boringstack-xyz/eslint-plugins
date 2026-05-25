@@ -55,3 +55,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Repo moved AI-Starter-Templates → boringstack-xyz; npm trusted
+          # publishers still point at the old repo so provenance PUT fails with
+          # misleading E404. Token publish works until publishers are updated.
+          NPM_CONFIG_PROVENANCE: "false"
