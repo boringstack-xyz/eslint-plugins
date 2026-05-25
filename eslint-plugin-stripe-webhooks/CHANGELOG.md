@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-stripe-webhooks
 
+## 0.1.2
+
+### Patch Changes
+
+- [`b45c58b`](https://github.com/boringstack-xyz/eslint-plugins/commit/b45c58b50b9b26dc5dd203719ce2328fcc664b54) Thanks [@agjs](https://github.com/agjs)! - Republish READMEs after monorepo migration — npm still showed stale per-repo CI badges on 0.1.1.
+
 ## 0.1.1
 
 ### Patch Changes

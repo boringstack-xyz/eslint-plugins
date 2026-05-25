@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-test-conventions",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESLint rules that catch the most common test-suite mistakes: focused tests, direct DB access from tests, and orphaned test files.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

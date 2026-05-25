@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-audit-log",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESLint rules ensuring mutations are audited, audit writes are fire-and-forget, and audit metadata never carries PII.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-cache-keys",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESLint rules preventing cache-layer bugs: missing TTLs, unprefixed keys that collide on shared Redis, and inline keys that bypass the helper layer.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-comment-hygiene",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESLint rules that catch agent-generated comment patterns: narrative prose ('Here we...', 'Now we...'), PR/issue references, and similar drift-prone metadata that belongs in commit messages, not source.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",

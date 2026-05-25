@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-tanstack-query-cache",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESLint rules for TanStack Query cache consistency: spread query keys must use setQueriesData / matcher APIs instead of setQueryData on the prefix alone.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
