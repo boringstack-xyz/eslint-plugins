@@ -42,7 +42,7 @@ export const noInlineJsxFunctionsRule = createRule<
   },
   defaultOptions: [{ allowSpreadPassthrough: false }],
   create(context, [options]) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (isStoryFile(filename)) {
       return {};

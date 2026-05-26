@@ -46,7 +46,7 @@ export const noJsxComputationRule = createRule<
   },
   defaultOptions: [{ allowSimpleTernary: true }],
   create(context, [options]) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (isStoryFile(filename)) {
       return {};

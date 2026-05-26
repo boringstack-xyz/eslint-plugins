@@ -104,7 +104,7 @@ export const noUntranslatedJsxTextRule = createRule<
     const ignoreFiles = options.ignoreFiles ?? DEFAULT_IGNORE_FILES;
 
     // Check if this file should be ignored
-    const filename = context.getFilename();
+    const filename = context.filename;
     if (shouldIgnoreFile(filename, ignoreFiles)) {
       return {};
     }

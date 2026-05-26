@@ -55,7 +55,7 @@ export const noStateInComponentBodyRule = createRule<
   },
   defaultOptions: [{ allowedHooks: DEFAULT_ALLOWED_HOOKS }],
   create(context, [options]) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (!isComponentFile(filename)) {
       return {};

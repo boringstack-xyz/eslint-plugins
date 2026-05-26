@@ -25,7 +25,7 @@ export const storiesRequireDefaultExportRule = createRule<
   },
   defaultOptions: [],
   create(context) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (!filename.endsWith(".stories.tsx")) {
       return {};

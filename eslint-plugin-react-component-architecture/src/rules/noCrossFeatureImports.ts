@@ -111,7 +111,7 @@ export const noCrossFeatureImportsRule = createRule<
       (options.allowList ?? []).map((pair) => pair.join("→"))
     );
 
-    const filename = context.getFilename();
+    const filename = context.filename;
     const currentFeature = extractFeatureName(filename, featuresDir);
 
     // Only check files inside features

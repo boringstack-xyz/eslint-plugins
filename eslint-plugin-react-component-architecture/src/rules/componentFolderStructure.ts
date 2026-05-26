@@ -71,7 +71,7 @@ export const componentFolderStructureRule = createRule<
     }
   ],
   create(context, [options]) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (!isComponentFile(filename)) {
       return {};

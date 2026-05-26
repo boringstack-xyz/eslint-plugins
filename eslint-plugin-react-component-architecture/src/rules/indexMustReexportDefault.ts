@@ -48,7 +48,7 @@ export const indexMustReexportDefaultRule = createRule<RuleOptions, MessageIds>(
   },
   defaultOptions: [],
   create(context) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (!isIndexFile(filename)) {
       return {};
