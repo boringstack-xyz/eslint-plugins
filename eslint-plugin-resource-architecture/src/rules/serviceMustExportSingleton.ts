@@ -135,7 +135,7 @@ export const serviceMustExportSingletonRule = createRule<Options, MessageIds>({
     const singletonNameRegex = new RegExp(singletonNamePattern);
     const requireClass = rawOptions?.requireClass ?? false;
 
-    const filename = context.getFilename();
+    const filename = context.filename;
     if (!filename || filename === "<input>") {
       return {};
     }

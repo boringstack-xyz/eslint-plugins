@@ -33,7 +33,7 @@ export const packageJsonExactDepsRule = createRule<RuleOptions, MessageIds>({
   },
   defaultOptions: [],
   create(context) {
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     if (!filename.endsWith("package.json")) {
       return {};

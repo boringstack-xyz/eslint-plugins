@@ -137,7 +137,7 @@ export const noCrossResourceInternalImportsRule = createRule<Options, MessageIds
     ];
     const globalResources = new Set(rawOptions?.globalResources ?? []);
 
-    const filename = context.getFilename();
+    const filename = context.filename;
     if (!filename || filename === "<input>") {
       return {};
     }

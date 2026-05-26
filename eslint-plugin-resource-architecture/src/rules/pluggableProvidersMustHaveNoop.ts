@@ -147,7 +147,7 @@ export const pluggableProvidersMustHaveNoopRule = createRule<Options, MessageIds
       )
     );
 
-    const filename = context.getFilename();
+    const filename = context.filename;
     if (!filename || filename === "<input>") {
       return {};
     }

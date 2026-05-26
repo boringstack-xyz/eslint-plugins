@@ -83,7 +83,7 @@ export const concernImportBoundariesRule = createRule<Options, MessageIds>({
     const orm = rawOptions?.orm ?? ["drizzle-orm"];
     const dbClientPattern = rawOptions?.dbClientPattern ?? "**/clients/postgres/**";
 
-    const filename = context.getFilename();
+    const filename = context.filename;
     if (!filename || filename === "<input>") {
       return {};
     }

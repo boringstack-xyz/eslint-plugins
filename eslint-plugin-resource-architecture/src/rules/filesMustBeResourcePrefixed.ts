@@ -72,7 +72,7 @@ export const filesMustBeResourcePrefixedRule = createRule<Options, MessageIds>({
     const suffixes = rawOptions?.suffixes ?? [...DEFAULT_SUFFIXES];
     const allowExceptions = rawOptions?.allowExceptions ?? ["index.ts"];
 
-    const filename = context.getFilename();
+    const filename = context.filename;
     if (!filename || filename === "<input>") {
       return {};
     }
