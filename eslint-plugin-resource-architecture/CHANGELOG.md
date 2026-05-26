@@ -1,5 +1,18 @@
 # @boring-stack-pkg/eslint-plugin-resource-architecture
 
+## 0.2.0
+
+### Minor Changes
+
+- [#5](https://github.com/boringstack-xyz/eslint-plugins/pull/5) [`7954d7b`](https://github.com/boringstack-xyz/eslint-plugins/commit/7954d7b6d6d8b476f1595240625b31f2b50fd405) Thanks [@agjs](https://github.com/agjs)! - Support ESLint 10.
+
+  ESLint 10 removed `context.getFilename()` (deprecated since v9). Switched
+  all rules in these three plugins to use the `context.filename` property
+  introduced in ESLint 9.
+
+  Peer dependency widened to `^8.57.0 || ^9.0.0 || ^10.0.0`. ESLint 8.x
+  and 9.x consumers see no behavior change.
+
 ## 0.1.2
 
 ### Patch Changes
