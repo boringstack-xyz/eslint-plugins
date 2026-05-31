@@ -1,7 +1,9 @@
+import { noBareDateNowRule } from "./noBareDateNow";
 import { noTemplateTrimEmptyTernaryRule } from "./noTemplateTrimEmptyTernary";
 import { preferEarlyReturnRule } from "./preferEarlyReturn";
 
 export const rules = {
   "prefer-early-return": preferEarlyReturnRule,
-  "no-template-trim-empty-ternary": noTemplateTrimEmptyTernaryRule
+  "no-template-trim-empty-ternary": noTemplateTrimEmptyTernaryRule,
+  "no-bare-date-now": noBareDateNowRule
 };
