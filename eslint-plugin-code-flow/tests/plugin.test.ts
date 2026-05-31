@@ -11,6 +11,7 @@ describe("plugin shape", () => {
 
   it("exposes every rule under kebab-case keys", () => {
     expect(Object.keys(plugin.rules ?? {}).sort()).toEqual([
+      "no-bare-date-now",
       "no-template-trim-empty-ternary",
       "prefer-early-return"
     ]);

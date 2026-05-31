@@ -2,6 +2,7 @@ import type { TSESLint } from "@typescript-eslint/utils";
 
 import { recommendedRules } from "./configs/recommended";
 import { rules } from "./rules";
+import { noBareDateNowRule } from "./rules/noBareDateNow";
 import { noTemplateTrimEmptyTernaryRule } from "./rules/noTemplateTrimEmptyTernary";
 import { preferEarlyReturnRule } from "./rules/preferEarlyReturn";
 
@@ -25,6 +26,7 @@ plugin.configs.recommended = {
   rules: recommendedRules
 };
 
+export { noBareDateNowRule };
 export { noTemplateTrimEmptyTernaryRule };
 export { preferEarlyReturnRule };
 export { rules };

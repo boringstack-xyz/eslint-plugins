@@ -2,6 +2,7 @@ import type { TSESLint } from "@typescript-eslint/utils";
 
 import { recommendedRules } from "./configs/recommended";
 import { rules } from "./rules";
+import { noHistoricalCommentsRule } from "./rules/no-historical-comments";
 import { noNarrationCommentsRule } from "./rules/no-narration-comments";
 import { noPrReferenceCommentsRule } from "./rules/no-pr-reference-comments";
 
@@ -25,7 +26,11 @@ plugin.configs.recommended = {
   rules: recommendedRules
 };
 
-export { noNarrationCommentsRule, noPrReferenceCommentsRule };
+export {
+  noHistoricalCommentsRule,
+  noNarrationCommentsRule,
+  noPrReferenceCommentsRule
+};
 export { rules };
 export const configs = plugin.configs;
 export default plugin;
