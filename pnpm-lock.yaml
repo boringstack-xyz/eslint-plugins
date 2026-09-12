@@ -643,6 +643,37 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@types/node@22.0.0)
 
+  eslint-plugin-three:
+    dependencies:
+      '@typescript-eslint/utils':
+        specifier: 8.0.0
+        version: 8.0.0(eslint@9.0.0)(typescript@6.0.3)
+    devDependencies:
+      '@eslint/js':
+        specifier: 9.0.0
+        version: 9.0.0
+      '@types/node':
+        specifier: 22.0.0
+        version: 22.0.0
+      '@typescript-eslint/parser':
+        specifier: 8.0.0
+        version: 8.0.0(eslint@9.0.0)(typescript@6.0.3)
+      '@typescript-eslint/rule-tester':
+        specifier: 8.0.0
+        version: 8.0.0(@eslint/eslintrc@3.3.5)(eslint@9.0.0)(typescript@6.0.3)
+      eslint:
+        specifier: 9.0.0
+        version: 9.0.0
+      tsup:
+        specifier: 8.0.0
+        version: 8.0.0(postcss@8.5.15)(typescript@6.0.3)
+      typescript:
+        specifier: 6.0.3
+        version: 6.0.3
+      vitest:
+        specifier: 2.0.0
+        version: 2.0.0(@types/node@22.0.0)
+
 packages:
 
   '@ampproject/remapping@2.3.0':
