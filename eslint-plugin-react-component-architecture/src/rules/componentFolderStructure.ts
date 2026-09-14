@@ -1,5 +1,6 @@
 import { existsSync } from "fs";
 import { dirname, join } from "path";
+import { AST_NODE_TYPES, type TSESTree } from "@typescript-eslint/utils";
 import type { JSONSchema4 } from "@typescript-eslint/utils/json-schema";
 
 import { createRule } from "../utils/createRule";
@@ -46,6 +47,20 @@ const optionSchema: JSONSchema4 = {
   }
 };
 
+/**
+ * A `.tsx` file that exports nothing is an internal helper of the component
+ * next to it (an illustration, a private sub-component), not a component
+ * with its own public surface, so it owes no hooks/types/stories/test.
+ */
+function exportsAnything(program: TSESTree.Program): boolean {
+  return program.body.some(
+    (statement) =>
+      statement.type === AST_NODE_TYPES.ExportNamedDeclaration ||
+      statement.type === AST_NODE_TYPES.ExportDefaultDeclaration ||
+      statement.type === AST_NODE_TYPES.ExportAllDeclaration
+  );
+}
+
 export const componentFolderStructureRule = createRule<
   RuleOptions,
   MessageIds
@@ -55,7 +70,7 @@ export const componentFolderStructureRule = createRule<
     type: "problem",
     docs: {
       description:
-        "Enforce required sibling files in component folders (hooks, types, stories, test, index)",
+        "Enforce required sibling files in component folders (hooks, types, stories, test, index); files that export nothing are internal helpers and exempt",
       recommended: true
     },
     schema: [optionSchema],
@@ -93,6 +108,10 @@ export const componentFolderStructureRule = createRule<
 
     return {
       "Program:exit"(node) {
+        if (!exportsAnything(node)) {
+          return;
+        }
+
         const dir = dirname(filename);
         const requiredSiblings = options.requiredSiblings ?? DEFAULT_SIBLINGS;
 

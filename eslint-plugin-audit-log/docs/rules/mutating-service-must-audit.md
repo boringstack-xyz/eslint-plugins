@@ -30,8 +30,17 @@ in some branch, the rule passes.
   mutatingPrefixes?: string[];   // default: ["^(create|update|delete|insert|register|approve|reject|activate|deactivate|enable|disable|complete|cancel|grant|revoke)"]
   auditCallees?: string[];       // default: ["auditLogService.record", "audit.record"]
   allowFunctions?: string[];     // default: []
+  includePrivate?: boolean;      // default: false
 }
 ```
+
+The audit obligation sits on a service's public surface. A module-private
+function (not exported) or a `private` / `protected` / `#name` class method
+is part of the audited method's body, so it is not checked on its own: an
+`insertDetail` helper called inside an audited `createComponent` transaction
+needs no second `audit.record`. Properties of an exported service object are
+always surface. Set `includePrivate: true` to check every matching name
+regardless of visibility.
 
 `auditCallees` are matched as dotted accessors with a forgiving suffix
 match: `audit.record` matches both `audit.record(...)` and

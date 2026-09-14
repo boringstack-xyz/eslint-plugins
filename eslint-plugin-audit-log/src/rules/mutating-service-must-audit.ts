@@ -19,6 +19,8 @@ export interface MutatingServiceMustAuditOptions {
   readonly mutatingPrefixes?: readonly string[];
   readonly auditCallees?: readonly string[];
   readonly allowFunctions?: readonly string[];
+  /** Also check module-private functions and private/protected class methods (default false). */
+  readonly includePrivate?: boolean;
 }
 
 type RuleOptions = [MutatingServiceMustAuditOptions];
@@ -47,9 +49,53 @@ const optionSchema: JSONSchema4 = {
       type: "array",
       items: { type: "string" },
       uniqueItems: true
-    }
+    },
+    includePrivate: { type: "boolean" }
   }
 };
+
+/**
+ * The audit obligation sits on the public surface of a service. A helper
+ * that only the audited method can reach (a non-exported module function or
+ * a private/protected class method) is part of that method's body, not a
+ * second mutation entry point.
+ */
+function isPrivateDeclaration(node: FunctionLike): boolean {
+  const parent = (node as { parent?: TSESTree.Node }).parent;
+
+  if (node.type === AST_NODE_TYPES.FunctionDeclaration) {
+    return (
+      parent === undefined ||
+      (parent.type !== AST_NODE_TYPES.ExportNamedDeclaration &&
+        parent.type !== AST_NODE_TYPES.ExportDefaultDeclaration)
+    );
+  }
+
+  if (parent === undefined) {
+    return false;
+  }
+
+  if (parent.type === AST_NODE_TYPES.VariableDeclarator) {
+    const declaration = (parent as { parent?: TSESTree.Node }).parent;
+    const owner = (declaration as { parent?: TSESTree.Node } | undefined)
+      ?.parent;
+
+    return (
+      declaration?.type === AST_NODE_TYPES.VariableDeclaration &&
+      owner?.type !== AST_NODE_TYPES.ExportNamedDeclaration
+    );
+  }
+
+  if (parent.type === AST_NODE_TYPES.MethodDefinition) {
+    return (
+      parent.key.type === AST_NODE_TYPES.PrivateIdentifier ||
+      parent.accessibility === "private" ||
+      parent.accessibility === "protected"
+    );
+  }
+
+  return false;
+}
 
 type FunctionLike =
   | TSESTree.FunctionDeclaration
@@ -88,7 +134,8 @@ export const mutatingServiceMustAuditRule = createRule<
       fileGlob: DEFAULT_FILE_GLOB,
       mutatingPrefixes: [...DEFAULT_MUTATING_PREFIXES],
       auditCallees: [...DEFAULT_AUDIT_CALLEES],
-      allowFunctions: []
+      allowFunctions: [],
+      includePrivate: false
     }
   ],
   create(context, [options]) {
@@ -96,6 +143,7 @@ export const mutatingServiceMustAuditRule = createRule<
     const mutatingPrefixes = options.mutatingPrefixes ?? DEFAULT_MUTATING_PREFIXES;
     const auditCallees = options.auditCallees ?? DEFAULT_AUDIT_CALLEES;
     const allowFunctions = new Set(options.allowFunctions ?? []);
+    const includePrivate = options.includePrivate ?? false;
 
     const relative = toPosixRelative(context.filename, context.cwd);
     if (!micromatch.isMatch(relative, fileGlob, { dot: true })) {
@@ -154,6 +202,9 @@ export const mutatingServiceMustAuditRule = createRule<
     function visitFn(node: FunctionLike): void {
       const name = getDeclaredName(node);
       if (name === null || !nameMatches(name)) {
+        return;
+      }
+      if (!includePrivate && isPrivateDeclaration(node)) {
         return;
       }
       stack.push({ node, name, hasAudit: false });

@@ -7,6 +7,23 @@ import { ruleTester } from "../test-utils/ruleTester";
 ruleTester.run(RULE_NAME, noRawSqlOutsideAllowlistRule, {
   valid: [
     {
+      // The idiomatic atomic increment: only arithmetic around column refs.
+      filename: "src/users/users.service.ts",
+      code: `
+        import { sql } from "drizzle-orm";
+        export const bump = () =>
+          db.update(links).set({ viewCount: sql\`\${links.viewCount} + 1\` });
+      `
+    },
+    {
+      filename: "src/users/users.service.ts",
+      code: `
+        import { sql } from "drizzle-orm";
+        export const rebalance = (seats) =>
+          db.update(plans).set({ used: sql\`(\${plans.used} - \${seats}) * 2\` });
+      `
+    },
+    {
       filename: "src/db/migrations/2026-01-init.ts",
       code: `
         import { sql } from "drizzle-orm";
@@ -90,6 +107,42 @@ ruleTester.run(RULE_NAME, noRawSqlOutsideAllowlistRule, {
     }
   ],
   invalid: [
+    {
+      // Text beyond arithmetic is a query, not an expression.
+      filename: "src/users/users.service.ts",
+      code: `
+        import { sql } from "drizzle-orm";
+        export const q = sql\`\${links.viewCount} + 1 WHERE 1=1\`;
+      `,
+      errors: [{ messageId: "noRawSql" }]
+    },
+    {
+      // A string literal in the hole is not a column reference.
+      filename: "src/users/users.service.ts",
+      code: `
+        import { sql } from "drizzle-orm";
+        export const q = sql\`\${links.slug} || \${"x"}\`;
+      `,
+      errors: [{ messageId: "noRawSql" }]
+    },
+    {
+      // No holes at all is plain SQL text.
+      filename: "src/users/users.service.ts",
+      code: `
+        import { sql } from "drizzle-orm";
+        export const q = sql\`1 + 1\`;
+      `,
+      errors: [{ messageId: "noRawSql" }]
+    },
+    {
+      filename: "src/users/users.service.ts",
+      options: [{ allowColumnArithmetic: false }],
+      code: `
+        import { sql } from "drizzle-orm";
+        export const q = sql\`\${links.viewCount} + 1\`;
+      `,
+      errors: [{ messageId: "noRawSql" }]
+    },
     {
       filename: "src/users/users.service.ts",
       code: `
