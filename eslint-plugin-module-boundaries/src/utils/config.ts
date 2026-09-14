@@ -8,12 +8,12 @@ export interface SingleSemanticModuleOptions {
   readonly debug?: boolean;
   readonly ignoreAmbientDeclarations?: boolean;
   /**
-   * Skip non-exported `const` declarations whose initializer is a plain
-   * literal (string, number, object, array, template). Such a constant is
-   * module-private configuration for the module's real semantics, not a
-   * second semantic category of its own (default false).
+   * Only exported declarations define a module's semantics. When true,
+   * non-exported top-level declarations (a config object, a render
+   * helper, a private class) are not classified, so a hook module may keep
+   * the helpers only it uses (default false).
    */
-  readonly ignorePrivateLiteralConstants?: boolean;
+  readonly ignorePrivateDeclarations?: boolean;
   readonly schemaLibraries?: readonly SchemaLibrary[];
   readonly reactComponentDetection?: {
     readonly enabled?: boolean;
@@ -29,7 +29,7 @@ export interface NormalizedOptions {
   readonly enumCategory: EnumCategory;
   readonly debug: boolean;
   readonly ignoreAmbientDeclarations: boolean;
-  readonly ignorePrivateLiteralConstants: boolean;
+  readonly ignorePrivateDeclarations: boolean;
   readonly schemaLibraries: readonly SchemaLibrary[];
   readonly reactComponentDetection: {
     readonly enabled: boolean;
@@ -54,8 +54,7 @@ export function normalizeOptions(
     enumCategory: options.enumCategory ?? "enum",
     debug: options.debug ?? false,
     ignoreAmbientDeclarations: options.ignoreAmbientDeclarations ?? false,
-    ignorePrivateLiteralConstants:
-      options.ignorePrivateLiteralConstants ?? false,
+    ignorePrivateDeclarations: options.ignorePrivateDeclarations ?? false,
     schemaLibraries: options.schemaLibraries ?? ["zod", "yup", "valibot"],
     reactComponentDetection: {
       enabled: options.reactComponentDetection?.enabled ?? true

@@ -10,16 +10,17 @@ ruleTester.run(RULE_NAME, singleSemanticModuleRule, {
       `
     },
     {
-      // A module-private literal constant next to the hook it configures.
+      // Private config, a private helper and a private class serve the
+      // exported hook; none of them gives the module a second meaning.
       code: `
         const SWITCH_FILTERS = { poles: [3, 5], kinds: ["blade", "toggle"] } as const;
-        const LIMIT = 20;
-        const TITLE = \`Switches (\${LIMIT})\`;
+        function labelFor(kind: string) { return kind.toUpperCase(); }
+        class Cursor { position = 0; }
         export function useSwitchesChapter() {
-          return { filters: SWITCH_FILTERS, limit: LIMIT, title: TITLE };
+          return { filters: SWITCH_FILTERS, label: labelFor("blade"), cursor: new Cursor() };
         }
       `,
-      options: [{ ignorePrivateLiteralConstants: true }]
+      options: [{ ignorePrivateDeclarations: true }]
     },
     {
       code: `
@@ -228,25 +229,24 @@ ruleTester.run(RULE_NAME, singleSemanticModuleRule, {
       errors: [{ messageId: "mixedSemanticCategories" }]
     },
     {
-      // Exported constants are surface, never exempt.
+      // Exported declarations are surface, never exempt.
       code: `
         export const SWITCH_FILTERS = { poles: [3, 5] } as const;
         export function useSwitchesChapter() {
           return SWITCH_FILTERS;
         }
       `,
-      options: [{ ignorePrivateLiteralConstants: true }],
+      options: [{ ignorePrivateDeclarations: true }],
       errors: [{ messageId: "mixedSemanticCategories" }]
     },
     {
-      // A computed private value is not configuration; it stays a constant.
+      // Two exported categories still mix, whatever the private helpers do.
       code: `
-        const CLIENT = createClient();
-        export function useClient() {
-          return CLIENT;
-        }
+        function helper() { return 1; }
+        export function useThing() { return helper(); }
+        export const THING_LIMIT = 3;
       `,
-      options: [{ ignorePrivateLiteralConstants: true }],
+      options: [{ ignorePrivateDeclarations: true }],
       errors: [{ messageId: "mixedSemanticCategories" }]
     },
     {

@@ -125,9 +125,9 @@ Controls enum classification:
 
 Includes declaration names and classification reasons in the lint error.
 
-### `ignorePrivateLiteralConstants`
+### `ignorePrivateDeclarations`
 
-`false` by default. When `true`, a non-exported `const` whose initializer is a plain literal (string, number, template, object or array literal, `as const` allowed) is not counted as a `constant` category. A `SWITCH_FILTERS` object that only its neighbouring hook reads configures that hook rather than giving the module a second meaning; exported constants and computed values (`createClient()`) still count.
+`false` by default. When `true`, only exported declarations are classified: a non-exported config object, render helper or private class next to the hook or component that uses it does not give the module a second category. Two exported categories still conflict, and an exported constant is still a constant.
 
 ### `ignoreAmbientDeclarations`
 

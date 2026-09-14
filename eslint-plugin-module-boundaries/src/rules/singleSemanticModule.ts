@@ -40,7 +40,7 @@ const optionSchema: JSONSchema4 = {
     ignoreAmbientDeclarations: {
       type: "boolean"
     },
-    ignorePrivateLiteralConstants: {
+    ignorePrivateDeclarations: {
       type: "boolean"
     },
     schemaLibraries: {
