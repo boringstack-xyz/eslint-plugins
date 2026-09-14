@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-react-component-architecture
 
+## 0.3.1
+
+### Patch Changes
+
+- [#15](https://github.com/boringstack-xyz/eslint-plugins/pull/15) [`3c02b5c`](https://github.com/boringstack-xyz/eslint-plugins/commit/3c02b5c823bc6cdcc93f0ab15a33f1c917d8c7ac) Thanks [@agjs](https://github.com/agjs)! - `component-folder-structure` no longer demands hooks, types, stories, a test and an index for a `.tsx` file that exports nothing. Such a file is an internal helper of the component beside it (an illustration, a private sub-component split out for length), not a component with a public surface; the full anatomy applies as soon as it gains an `export`.
+
 ## 0.3.0
 
 ### Minor Changes

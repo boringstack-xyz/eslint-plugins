@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-drizzle-conventions
 
+## 0.2.0
+
+### Minor Changes
+
+- [#15](https://github.com/boringstack-xyz/eslint-plugins/pull/15) [`3c02b5c`](https://github.com/boringstack-xyz/eslint-plugins/commit/3c02b5c823bc6cdcc93f0ab15a33f1c917d8c7ac) Thanks [@agjs](https://github.com/agjs)! - `no-raw-sql-outside-allowlist` allows `sql` templates whose literal text is only arithmetic around interpolated column references, such as `sql\`${links.viewCount} + 1\``, the idiomatic atomic increment. Templates with no holes, string literals in the holes, or any other SQL text are still reported. Disable with the new `allowColumnArithmetic: false` option.
+
 ## 0.1.2
 
 ### Patch Changes
