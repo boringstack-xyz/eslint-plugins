@@ -48,6 +48,7 @@ For documentation on how architecture rules are enforced in CI and review, see [
 | [`@boring-stack-pkg/eslint-plugin-structured-logging`](./eslint-plugin-structured-logging)                     | Structured logging conventions.                 |
 | [`@boring-stack-pkg/eslint-plugin-tanstack-query-cache`](./eslint-plugin-tanstack-query-cache)                 | TanStack Query cache key conventions.           |
 | [`@boring-stack-pkg/eslint-plugin-test-conventions`](./eslint-plugin-test-conventions)                         | Test layout and naming.                         |
+| [`@boring-stack-pkg/eslint-plugin-three`](./eslint-plugin-three)                                               | Three.js rendering conventions (tsforge port).  |
 
 ## Development
 
