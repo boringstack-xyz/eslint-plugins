@@ -37,7 +37,9 @@ interface ComponentFolderStructureOptions {
 
 ## Detection
 
-The rule triggers on `.tsx` files whose filename starts with an uppercase letter and contains a default export. It checks the parent directory for required siblings.
+The rule triggers on `.tsx` files whose filename starts with an uppercase letter and that export something. It checks the parent directory for required siblings.
+
+A `.tsx` file that exports nothing is treated as an internal helper of the component beside it (an illustration, a private sub-component split out for length) and owes no siblings of its own. Once it gains an `export`, it is a component with a public surface and the full anatomy applies.
 
 ## Limitations
 
@@ -51,4 +53,4 @@ None — create the missing sibling files manually.
 
 ## Version
 
-0.1.0
+0.1.0; files without exports exempt since 0.3.1

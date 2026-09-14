@@ -31,6 +31,7 @@ export const up = sql`CREATE TABLE users (id text)`;
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `allowFiles` | `string[]` | `["**/migrations/**", "**/raw/**"]` | Glob patterns of files where raw `sql` is allowed. Matched against the absolute filename ESLint passes to the rule. |
+| `allowColumnArithmetic` | `boolean` | `true` | Allow templates whose literal text is only arithmetic (`+ - * / % ( )`, digits) around interpolated identifiers or member expressions, e.g. `sql\`${links.viewCount} + 1\``, the idiomatic atomic increment. Templates with no holes, with string literals in the holes, or with any other text are still reported. |
 
 Glob syntax supports `**`, `*`, `?` and literal segments.
 
