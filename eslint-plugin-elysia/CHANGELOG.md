@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-elysia
 
+## 0.2.0
+
+### Minor Changes
+
+- [`ee618ed`](https://github.com/boringstack-xyz/eslint-plugins/commit/ee618ede223d3d5d16f22206fc85cfeed7adb411) Thanks [@agjs](https://github.com/agjs)! - New rule `portable-schema-types`: in API contract schema files (`**/*.schemas.ts` by default) it reports Elysia's coercing `t.Integer()` (published as `anyOf [string, integer]`, typed `string | number` by the generated client), `t.Tuple()` (no OpenAPI 3.0 representation; the client widens it) and `t.Union(values.map(...))` (static type collapses to `undefined`). Each message names the portable replacement: `Type.Integer()` from `@sinclair/typebox`, `t.Array()`, `t.UnionEnum()`.
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-module-boundaries
 
+## 0.2.0
+
+### Minor Changes
+
+- [`ee618ed`](https://github.com/boringstack-xyz/eslint-plugins/commit/ee618ede223d3d5d16f22206fc85cfeed7adb411) Thanks [@agjs](https://github.com/agjs)! - `single-semantic-module` gains `ignorePrivateDeclarations` (default `false`). When enabled, only exported declarations are classified: a non-exported config object, render helper or private class next to the hook or component that uses it no longer gives the module a second semantic category. Two exported categories still conflict.
+
 ## 0.1.2
 
 ### Patch Changes
