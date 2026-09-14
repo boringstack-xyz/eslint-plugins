@@ -10,7 +10,7 @@ ESLint rule: **static** `t("…")` / `i18n.t("…")` translation keys must exist
 pnpm add -D @boring-stack-pkg/eslint-plugin-i18n-keys
 ```
 
-Peer deps: `eslint` 8.57 / 9+, `@typescript-eslint/parser` 8+, `typescript` 5+.
+Peer deps: `eslint` 8.57 / 9 / 10, `@typescript-eslint/parser` 8+, `typescript` 5+.
 
 ## Use (flat config)
 
