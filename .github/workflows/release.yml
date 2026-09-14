@@ -42,11 +42,6 @@ jobs:
       - name: Upgrade npm
         run: npm install -g npm@latest
 
-      - name: Verify npm auth
-        run: npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Detect pending changesets
         id: pending
         run: |
@@ -69,6 +64,14 @@ jobs:
           title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Only the publish path needs the registry; the version PR must still be
+      # created when the token has expired, so the failure is visible there.
+      - name: Verify npm auth
+        if: steps.pending.outputs.has == 'false'
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to npm
         if: steps.pending.outputs.has == 'false'
