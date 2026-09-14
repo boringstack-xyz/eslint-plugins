@@ -15,6 +15,7 @@ describe("plugin shape", () => {
       "no-decorate-state-collision",
       "no-direct-error-throw",
       "no-separate-model-interfaces",
+      "portable-schema-types",
       "prefer-destructured-context",
       "prefer-direct-return",
       "prefer-static-services",

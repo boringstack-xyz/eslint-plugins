@@ -6,6 +6,7 @@ import { consistentStatusViaSetRule } from "./rules/consistentStatusViaSet";
 import { noDecorateStateCollisionRule } from "./rules/noDecorateStateCollision";
 import { noDirectErrorThrowRule } from "./rules/noDirectErrorThrow";
 import { noSeparateModelInterfacesRule } from "./rules/noSeparateModelInterfaces";
+import { portableSchemaTypesRule } from "./rules/portableSchemaTypes";
 import { preferDestructuredContextRule } from "./rules/preferDestructuredContext";
 import { preferDirectReturnRule } from "./rules/preferDirectReturn";
 import { preferStaticServicesRule } from "./rules/preferStaticServices";
@@ -37,6 +38,7 @@ plugin.configs.recommended = {
 };
 
 export {
+  portableSchemaTypesRule,
   consistentStatusViaSetRule,
   noDecorateStateCollisionRule,
   noDirectErrorThrowRule,

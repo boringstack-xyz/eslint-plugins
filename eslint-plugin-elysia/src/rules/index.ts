@@ -2,6 +2,7 @@ import { consistentStatusViaSetRule } from "./consistentStatusViaSet";
 import { noDecorateStateCollisionRule } from "./noDecorateStateCollision";
 import { noDirectErrorThrowRule } from "./noDirectErrorThrow";
 import { noSeparateModelInterfacesRule } from "./noSeparateModelInterfaces";
+import { portableSchemaTypesRule } from "./portableSchemaTypes";
 import { preferDestructuredContextRule } from "./preferDestructuredContext";
 import { preferDirectReturnRule } from "./preferDirectReturn";
 import { preferStaticServicesRule } from "./preferStaticServices";
@@ -25,5 +26,6 @@ export const rules = {
   "prefer-throw-status": preferThrowStatusRule,
   "prefer-direct-return": preferDirectReturnRule,
   "no-decorate-state-collision": noDecorateStateCollisionRule,
-  "route-must-check-ability": routeMustCheckAbilityRule
+  "route-must-check-ability": routeMustCheckAbilityRule,
+  "portable-schema-types": portableSchemaTypesRule
 };

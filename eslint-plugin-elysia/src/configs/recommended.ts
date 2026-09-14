@@ -11,5 +11,6 @@ export const recommendedRules = {
   "elysia/prefer-throw-status": "error",
   "elysia/prefer-direct-return": "error",
   "elysia/no-decorate-state-collision": "error",
-  "elysia/route-must-check-ability": "error"
+  "elysia/route-must-check-ability": "error",
+  "elysia/portable-schema-types": "error"
 } as const;

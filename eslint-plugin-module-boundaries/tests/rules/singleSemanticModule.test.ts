@@ -10,6 +10,18 @@ ruleTester.run(RULE_NAME, singleSemanticModuleRule, {
       `
     },
     {
+      // A module-private literal constant next to the hook it configures.
+      code: `
+        const SWITCH_FILTERS = { poles: [3, 5], kinds: ["blade", "toggle"] } as const;
+        const LIMIT = 20;
+        const TITLE = \`Switches (\${LIMIT})\`;
+        export function useSwitchesChapter() {
+          return { filters: SWITCH_FILTERS, limit: LIMIT, title: TITLE };
+        }
+      `,
+      options: [{ ignorePrivateLiteralConstants: true }]
+    },
+    {
       code: `
         import type { User } from "./types";
         export type { User };
@@ -205,6 +217,38 @@ ruleTester.run(RULE_NAME, singleSemanticModuleRule, {
     }
   ],
   invalid: [
+    {
+      // Off by default: the private constant still counts.
+      code: `
+        const SWITCH_FILTERS = { poles: [3, 5] } as const;
+        export function useSwitchesChapter() {
+          return SWITCH_FILTERS;
+        }
+      `,
+      errors: [{ messageId: "mixedSemanticCategories" }]
+    },
+    {
+      // Exported constants are surface, never exempt.
+      code: `
+        export const SWITCH_FILTERS = { poles: [3, 5] } as const;
+        export function useSwitchesChapter() {
+          return SWITCH_FILTERS;
+        }
+      `,
+      options: [{ ignorePrivateLiteralConstants: true }],
+      errors: [{ messageId: "mixedSemanticCategories" }]
+    },
+    {
+      // A computed private value is not configuration; it stays a constant.
+      code: `
+        const CLIENT = createClient();
+        export function useClient() {
+          return CLIENT;
+        }
+      `,
+      options: [{ ignorePrivateLiteralConstants: true }],
+      errors: [{ messageId: "mixedSemanticCategories" }]
+    },
     {
       code: `
         export interface User {}

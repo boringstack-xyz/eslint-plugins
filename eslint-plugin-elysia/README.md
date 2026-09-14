@@ -57,6 +57,7 @@ rules: {
 | [`route-requires-schema`](docs/rules/route-requires-schema.md)               | Schema           | Every route must declare at least one of `body`/`query`/`params`/`response`/`headers`/`cookie`.              |
 | [`route-requires-tag`](docs/rules/route-requires-tag.md)                     | Convention       | Every route must declare `detail.tags` for Swagger grouping.                                                 |
 | [`no-direct-error-throw`](docs/rules/no-direct-error-throw.md)               | Safety (fixable) | Disallow `throw new Error(...)`; use a typed error factory.                                                  |
+| [`portable-schema-types`](docs/rules/portable-schema-types.md)               | Safety           | In `*.schemas.ts`, forbid `t.Integer()`, `t.Tuple()` and `t.Union(x.map(...))`, which the OpenAPI client cannot carry. |
 | [`consistent-status-via-set`](docs/rules/consistent-status-via-set.md)       | Convention       | Inside route handlers, set status via `set.status = N`, not `new Response(body, { status })`.                |
 | [`prefer-destructured-context`](docs/rules/prefer-destructured-context.md)   | Performance      | Don't pass the full Elysia `Context` to controllers/services — destructure at the boundary.                  |
 | [`require-plugin-name`](docs/rules/require-plugin-name.md)                   | Lifecycle        | Exported `new Elysia(...)` instances must declare `{ name: "..." }` for runtime deduplication.               |

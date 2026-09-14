@@ -36,6 +36,7 @@ type Options = [{
   enumCategory?: "enum" | "type";
   debug?: boolean;
   ignoreAmbientDeclarations?: boolean;
+  ignorePrivateLiteralConstants?: boolean; // skip non-exported literal consts (default false)
   schemaLibraries?: Array<"zod" | "yup" | "valibot">;
   reactComponentDetection?: { enabled?: boolean };
   hookDetection?: {

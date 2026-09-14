@@ -42,8 +42,46 @@ export function classifyTopLevelStatement(
       return classifyDefaultExport(statement, context);
 
     default:
+      if (
+        context.options.ignorePrivateLiteralConstants &&
+        isPrivateLiteralConstant(statement)
+      ) {
+        return [];
+      }
+
       return classifyDeclarationLike(statement, context);
   }
+}
+
+const LITERAL_INITIALIZERS = new Set<TSESTree.AST_NODE_TYPES>([
+  AST_NODE_TYPES.Literal,
+  AST_NODE_TYPES.TemplateLiteral,
+  AST_NODE_TYPES.ObjectExpression,
+  AST_NODE_TYPES.ArrayExpression,
+  AST_NODE_TYPES.UnaryExpression
+]);
+
+/**
+ * A non-exported `const` whose every initializer is a plain literal (after
+ * unwrapping `as const` and parentheses). It configures the module's real
+ * semantics rather than adding a category of its own, so callers may opt
+ * out of counting it.
+ */
+function isPrivateLiteralConstant(statement: TSESTree.Node): boolean {
+  if (
+    statement.type !== AST_NODE_TYPES.VariableDeclaration ||
+    statement.kind !== "const"
+  ) {
+    return false;
+  }
+
+  return statement.declarations.every((declarator) => {
+    if (!declarator.init) {
+      return false;
+    }
+
+    return LITERAL_INITIALIZERS.has(unwrapExpression(declarator.init).type);
+  });
 }
 
 function classifyNamedExport(
