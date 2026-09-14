@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-audit-log
 
+## 0.3.0
+
+### Minor Changes
+
+- [#17](https://github.com/boringstack-xyz/eslint-plugins/pull/17) [`12fd7ee`](https://github.com/boringstack-xyz/eslint-plugins/commit/12fd7ee32754f76a24ed1397ab6bed18940c85a9) Thanks [@agjs](https://github.com/agjs)! - `mutating-service-must-audit` now checks a service's public surface only: module-private functions (not exported) and `private` / `protected` / `#name` class methods are treated as part of the audited method's body, so an `insertDetail` helper called inside an audited `createComponent` transaction no longer needs a second `audit.record`. Exported functions, public methods and properties of service objects are still checked. Set the new `includePrivate: true` option to restore the previous behaviour.
+
 ## 0.2.0
 
 ### Minor Changes
