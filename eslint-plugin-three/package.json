@@ -1,6 +1,6 @@
 {
   "name": "@boring-stack-pkg/eslint-plugin-three",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ESLint plugin for Three.js as a render substrate: canonical imports, GPU dispose contracts, scene-graph APIs, loader error paths, and instanced-buffer updates. Ported from the tsforge `three` rule pack.",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
