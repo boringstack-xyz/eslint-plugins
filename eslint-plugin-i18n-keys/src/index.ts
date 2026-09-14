@@ -8,7 +8,7 @@ type Plugin = TSESLint.FlatConfig.Plugin & {
 };
 
 const plugin: Plugin = {
-  meta: { name: "eslint-plugin-i18n-keys", version: "0.1.0" },
+  meta: { name: "eslint-plugin-i18n-keys", version: "0.1.3" },
   rules,
   configs: {}
 };
