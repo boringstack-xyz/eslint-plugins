@@ -35,6 +35,14 @@ export default [
 
 The bundled `recommended` config enables the same rule; **override `dictionary`** to match your repo’s locale file path.
 
+`dictionary` also accepts an array. The leaf keys of every file are merged,
+for a namespace whose copy is split between the client bundle and text
+served at runtime (paid lesson content, remotely managed strings):
+
+```js
+{ dictionary: ["src/lib/i18n/locales/en/guide.json", "../api/src/api/courses/content/en/wiring.json"] }
+```
+
 ## Rules
 
 | Rule                            | Description                                                                                       |

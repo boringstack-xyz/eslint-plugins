@@ -9,7 +9,13 @@ import { createRule } from "../utils/createRule";
 type MessageIds = "missingKey" | "missingPluralKey" | "dictionaryReadFailed";
 
 export interface StaticTranslationKeyExistsOptions {
-  readonly dictionary: string;
+  /**
+   * One JSON dictionary, or several whose leaf keys are merged. Several
+   * files suit a namespace that is split between a public bundle and
+   * copy served at runtime (paid lesson text, remote-managed strings):
+   * the rule then sees the whole vocabulary a `t()` call can resolve.
+   */
+  readonly dictionary: string | readonly string[];
 }
 
 type RuleOptions = [StaticTranslationKeyExistsOptions];
@@ -19,9 +25,24 @@ const optionSchema: JSONSchema4 = {
   additionalProperties: false,
   required: ["dictionary"],
   properties: {
-    dictionary: { type: "string", minLength: 1 }
+    dictionary: {
+      anyOf: [
+        { type: "string", minLength: 1 },
+        {
+          type: "array",
+          minItems: 1,
+          items: { type: "string", minLength: 1 }
+        }
+      ]
+    }
   }
 };
+
+function dictionaryPaths(
+  dictionary: string | readonly string[]
+): readonly string[] {
+  return typeof dictionary === "string" ? [dictionary] : dictionary;
+}
 
 function collectLeafKeys(
   value: unknown,
@@ -46,7 +67,11 @@ function collectLeafKeys(
   }
 }
 
-function loadDictionary(pathFromRoot: string, cwd: string): Set<string> {
+function loadDictionary(
+  pathFromRoot: string,
+  cwd: string,
+  keys: Set<string>
+): void {
   const abs = isAbsolute(pathFromRoot)
     ? pathFromRoot
     : resolve(cwd, pathFromRoot);
@@ -57,12 +82,23 @@ function loadDictionary(pathFromRoot: string, cwd: string): Set<string> {
 
   const raw = readFileSync(abs, "utf8");
   const parsed: unknown = JSON.parse(raw);
-  const keys = new Set<string>();
 
   if (parsed !== null && typeof parsed === "object" && !Array.isArray(parsed)) {
     for (const [k, v] of Object.entries(parsed)) {
       collectLeafKeys(v, k, keys);
     }
+  }
+}
+
+/** Every leaf key across all configured dictionaries. */
+function loadDictionaries(
+  dictionary: string | readonly string[],
+  cwd: string
+): Set<string> {
+  const keys = new Set<string>();
+
+  for (const path of dictionaryPaths(dictionary)) {
+    loadDictionary(path, cwd, keys);
   }
 
   return keys;
@@ -205,10 +241,11 @@ export const staticTranslationKeyExistsRule = createRule<
   defaultOptions: [{ dictionary: "src/lib/i18n/locales/en/common.json" }],
   create(context, [options]) {
     const cwd = context.cwd ?? process.cwd();
+    const dictionaryLabel = dictionaryPaths(options.dictionary).join(", ");
     let keys: Set<string> | undefined;
 
     try {
-      keys = loadDictionary(options.dictionary, cwd);
+      keys = loadDictionaries(options.dictionary, cwd);
     } catch {
       keys = undefined;
     }
@@ -219,7 +256,7 @@ export const staticTranslationKeyExistsRule = createRule<
           context.report({
             node,
             messageId: "dictionaryReadFailed",
-            data: { path: options.dictionary, cwd }
+            data: { path: dictionaryLabel, cwd }
           });
         }
       },
@@ -252,7 +289,7 @@ export const staticTranslationKeyExistsRule = createRule<
             data: {
               key,
               fallback: candidates[0] ?? key,
-              dictionary: options.dictionary
+              dictionary: dictionaryLabel
             }
           });
 
@@ -262,7 +299,7 @@ export const staticTranslationKeyExistsRule = createRule<
         context.report({
           node: node.arguments[0] ?? node,
           messageId: "missingKey",
-          data: { key, dictionary: options.dictionary }
+          data: { key, dictionary: dictionaryLabel }
         });
       }
     };

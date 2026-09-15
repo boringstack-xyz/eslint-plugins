@@ -15,6 +15,11 @@ const dictPath = join(
   "../fixtures/test-dict.json"
 );
 
+const paidDictPath = join(
+  dirname(fileURLToPath(import.meta.url)),
+  "../fixtures/paid-dict.json"
+);
+
 const ruleTester = new RuleTester({
   languageOptions: {
     parser,
@@ -27,6 +32,10 @@ ruleTester.run("static-translation-key-exists", staticTranslationKeyExistsRule, 
     {
       code: `const x = t("a.b");`,
       options: [{ dictionary: dictPath }]
+    },
+    {
+      code: `t("a.b"); t("paid.lesson"); t("a.extra");`,
+      options: [{ dictionary: [dictPath, paidDictPath] }]
     },
     {
       code: `i18n.t("leaf");`,
@@ -66,6 +75,19 @@ ruleTester.run("static-translation-key-exists", staticTranslationKeyExistsRule, 
     }
   ],
   invalid: [
+    {
+      code: `t("paid.missing");`,
+      options: [{ dictionary: [dictPath, paidDictPath] }],
+      errors: [
+        {
+          messageId: "missingKey",
+          data: {
+            key: "paid.missing",
+            dictionary: `${dictPath}, ${paidDictPath}`
+          }
+        }
+      ]
+    },
     {
       code: `t("nope");`,
       options: [{ dictionary: dictPath }],
