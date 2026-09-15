@@ -1,5 +1,11 @@
 # @boring-stack-pkg/eslint-plugin-i18n-keys
 
+## 0.2.0
+
+### Minor Changes
+
+- [#21](https://github.com/boringstack-xyz/eslint-plugins/pull/21) [`6392a87`](https://github.com/boringstack-xyz/eslint-plugins/commit/6392a878f97f24803411b277f4e6611b12dd72cc) Thanks [@agjs](https://github.com/agjs)! - `static-translation-key-exists` accepts `dictionary` as an array of JSON files whose leaf keys are merged, so a namespace split between the client bundle and copy served at runtime (paid course text, remotely managed strings) is still checked as one vocabulary. Diagnostics name every file consulted.
+
 ## 0.1.3
 
 ### Patch Changes
